@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Bootstrap Admin</title>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap3.3.7.css">
+
+  <link rel="stylesheet" type="text/css" href="/stylesheets/theme.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.css">
+
+  <script src="/lib/jquery-1.12.4.js" type="text/javascript"></script>
+
+  <!-- Demo page code -->
+
+  <style type="text/css">
+    #line-chart {
+      height: 300px;
+      width: 800px;
+      margin: 0px auto;
+      margin-top: 1em;
+    }
+
+    .brand {
+      font-family: georgia, serif;
+    }
+
+    .brand .first {
+      color: #ccc;
+      font-style: italic;
+    }
+
+    .brand .second {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .navbar-inverse {
+      background-color: #5a6883 !important;
+      border-color: #5a6883 !important;
+    }
+  </style>
+
+
+</head>
+
+
+<body class="">
+  <!--<![endif]-->
+
+  <%-include('nav.html',{user})%>
+  <%-include('sidebar.html'),{cp}%>
+  <div class="content">
+
+    <div class="header">
+      <h1 class="page-title">关于列表</h1>
+    </div>
+    <ul class="breadcrumb">
+      <li><a href="/admin/index">主页</a> <span class="divider"></span></li>
+      <li class="active">列表</li>
+    </ul>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+
+        <div class="btn-toolbar">
+          <a href="/admin/kehu/item" class="btn btn-primary"><i class="icon-plus"></i> 新增列表</a>
+        </div>
+        <div class="well">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 10%">#</th>
+                <th style="width: 20%">公司</th>
+                <th style="width: 20%">描述</th>
+                <th style="width: 20%">网址</th>
+                <th style="width: 20%">缩略图</th>
+                <th style="width: 10%"></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let i=0;i<kehu.length;i++){ %>
+              <tr>
+                <td>
+                  <%= (i+1)%>
+                </td>
+                <td>
+                  <%= kehu[i].company%>
+                </td>
+                <td>
+                  <%= kehu[i].description%>
+                </td>
+                <td>
+                  <%= kehu[i].website%>
+                </td>
+                <td>
+                  <%= kehu[i].imageUrl%>
+                </td>
+                <td>
+                  <a href="/admin/kehu/item/<%= kehu[i]._id%>"><i class="icon-pencil"></i></a>
+                  <a onclick="showModal('<%= kehu[i]._id%>')"><i class="icon-remove"></i></a>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li><a href="/admin/kehu/list?page=<%= (currPage-1) >= 0 ? (currPage-1) : 0 %>">上一页</a></li>
+            <% for(let i=0;i<kehuCount;i++){ %>
+            <li>
+              <a href="/admin/kehu/list?page=<%= i%>">
+                <%= (i+1) %>
+              </a>
+            </li>
+            <% } %>
+            <li><a href="/admin/kehu/list?page=<%= (currPage+1) <=(kehuCount-1) ?(currPage+1) : (kehuCount-1)  %>">下一页</a></li>
+          </ul>
+        </nav>
+        <!-- 删除的模态框 -->
+        <%-include('myModal.html')%>
+
+        <footer>
+          <hr>
+          <p class="pull-right">Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+
+          <p>&copy; 2012 <a href="#" target="_blank">Portnine</a></p>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.29.2/sweetalert2.all.js"></script>
+  <script src="/lib/bootstrap/js/bootstrap3.3.7.js"></script>
+  <script type="text/javascript">
+    var kehuId = '';
+
+    function showModal(id) {
+      $('#myModal').modal('show');
+      kehuId = id;
+    }
+    $("[rel=tooltip]").tooltip();
+    $(function () {
+      $('#delUser').click(function () {
+        $.post('/admin/kehu/deleteItem', {
+          cid: kehuId
+        }, function (data) {
+          if (data.code == 200) {
+            swal(data.msg);
+            window.location.reload();
+          }
+        });
+        $('#myModal').modal('hide');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

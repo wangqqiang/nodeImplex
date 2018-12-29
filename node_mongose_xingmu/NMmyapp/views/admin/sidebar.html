@@ -1,0 +1,68 @@
+<div class="sidebar-nav">
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            关于
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse <%= cp=='/admin/about/list' ? 'in' : ''%>">
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><a href="/admin/about/list">关于列表</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingService">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseService">
+            服务
+          </a>
+        </h4>
+      </div>
+      <div id="collapseService" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><a href="/admin/service/list">服务列表</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingKehu">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseKehu">
+            客户端
+          </a>
+        </h4>
+      </div>
+      <div id="collapseKehu" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><a href="/admin/kehu/list">客户列表</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            账号管理
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><a href="/admin/password/pwd">重置密码</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
